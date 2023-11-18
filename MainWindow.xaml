@@ -1,0 +1,55 @@
+﻿<Window x:Class="Graph_4_lab.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Graph_4_lab"
+        xmlns:h="http://helix-toolkit.org/wpf"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="600" Width="1200">
+    <Grid ShowGridLines="True">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.1*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="0.1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.1*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="0.1*"/>
+        </Grid.RowDefinitions>
+        
+        
+                                <!--                          HELIX PLOTS                          !-->
+        <h:HelixViewport3D Grid.Row="1" Grid.Column="1" Name="helixViewportInput">
+            <h:DefaultLights/>
+            <h:MeshGeometryVisual3D x:Name="meshVisualInput"/>
+        </h:HelixViewport3D>
+        
+        <h:HelixViewport3D Grid.Row="1" Grid.Column="2" Name="helixViewportOutput">
+            <h:DefaultLights/>
+            <h:MeshGeometryVisual3D x:Name="meshVisualOutput"/>
+        </h:HelixViewport3D>
+        
+                                <!--                          BUTTONS                          !-->
+        <Button Grid.Row="2" Grid.Column="3" Name="BtnLoadFile"
+                Width="100" Height="30" Margin="0 140 0 0"
+                Click="BtnLoadFile_OnClick">Load Figure</Button>
+                                
+                                <!--                          MATRIX                           !-->
+        <ListView Grid.Row="2" Grid.Column="1" Name="CordList">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=N}" Width="110">№</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=X}" Width="110">X</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Y}" Width="110">Y</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Z}" Width="110">Z</GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+    </Grid>
+</Window>

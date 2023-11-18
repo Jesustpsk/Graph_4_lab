@@ -1,0 +1,129 @@
+{
+  "version": 3,
+  "targets": {
+    "net7.0-windows7.0": {
+      "HelixToolkit.Wpf/2.24.0": {
+        "type": "package",
+        "compile": {
+          "lib/net462/HelixToolkit.Wpf.dll": {
+            "related": ".XML"
+          }
+        },
+        "runtime": {
+          "lib/net462/HelixToolkit.Wpf.dll": {
+            "related": ".XML"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "HelixToolkit.Wpf/2.24.0": {
+      "sha512": "oVoQcAGzq8HHBOAhcNVESsXhF75FI9qVrHvom38m71Ru2/7Aw5mSFY6MNlOCwRiRJCjGJYrNX4NKeiL6QBtSPA==",
+      "type": "package",
+      "path": "helixtoolkit.wpf/2.24.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "AUTHORS",
+        "CONTRIBUTORS",
+        "LICENSE",
+        "README.md",
+        "helixtoolkit.png",
+        "helixtoolkit.wpf.2.24.0.nupkg.sha512",
+        "helixtoolkit.wpf.nuspec",
+        "lib/net462/HelixToolkit.Wpf.XML",
+        "lib/net462/HelixToolkit.Wpf.dll"
+      ]
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net7.0-windows7.0": [
+      "HelixToolkit.Wpf >= 2.24.0"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\dmkuz\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "D:\\Учеба\\Graphics\\Graph_4_lab\\Graph_4_lab.csproj",
+      "projectName": "Graph_4_lab",
+      "projectPath": "D:\\Учеба\\Graphics\\Graph_4_lab\\Graph_4_lab.csproj",
+      "packagesPath": "C:\\Users\\dmkuz\\.nuget\\packages\\",
+      "outputPath": "D:\\Учеба\\Graphics\\Graph_4_lab\\obj\\",
+      "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
+      "configFilePaths": [
+        "C:\\Users\\dmkuz\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net7.0-windows"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net7.0-windows7.0": {
+          "targetAlias": "net7.0-windows",
+          "projectReferences": {}
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "net7.0-windows7.0": {
+        "targetAlias": "net7.0-windows",
+        "dependencies": {
+          "HelixToolkit.Wpf": {
+            "target": "Package",
+            "version": "[2.24.0, )"
+          }
+        },
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          },
+          "Microsoft.WindowsDesktop.App.WPF": {
+            "privateAssets": "none"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+      }
+    }
+  },
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'HelixToolkit.Wpf 2.24.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net7.0-windows7.0'. This package may not be fully compatible with your project.",
+      "libraryId": "HelixToolkit.Wpf",
+      "targetGraphs": [
+        "net7.0-windows7.0"
+      ]
+    }
+  ]
+}

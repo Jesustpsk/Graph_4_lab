@@ -1,0 +1,41 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v7.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v7.0": {
+      "Graph_4_lab/1.0.0": {
+        "dependencies": {
+          "HelixToolkit.Wpf": "2.24.0"
+        },
+        "runtime": {
+          "Graph_4_lab.dll": {}
+        }
+      },
+      "HelixToolkit.Wpf/2.24.0": {
+        "runtime": {
+          "lib/net462/HelixToolkit.Wpf.dll": {
+            "assemblyVersion": "2.24.0.0",
+            "fileVersion": "2.24.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Graph_4_lab/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "HelixToolkit.Wpf/2.24.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-oVoQcAGzq8HHBOAhcNVESsXhF75FI9qVrHvom38m71Ru2/7Aw5mSFY6MNlOCwRiRJCjGJYrNX4NKeiL6QBtSPA==",
+      "path": "helixtoolkit.wpf/2.24.0",
+      "hashPath": "helixtoolkit.wpf.2.24.0.nupkg.sha512"
+    }
+  }
+}
