@@ -36,8 +36,12 @@
         
                                 <!--                          BUTTONS                          !-->
         <Button Grid.Row="2" Grid.Column="3" Name="BtnLoadFile"
-                Width="100" Height="30" Margin="0 140 0 0"
+                Width="100" Height="30" Margin="110 140 0 0"
                 Click="BtnLoadFile_OnClick">Load Figure</Button>
+                                
+        <Button Grid.Row="2" Grid.Column="3" Name="BtnProj"
+                Width="100" Height="30" Margin="0 140 110 0"
+                Click="BtnProj_OnClick">Projection</Button>
                                 
                                 <!--                          MATRIX                           !-->
         <ListView Grid.Row="2" Grid.Column="1" Name="CordList">
@@ -47,6 +51,46 @@
                     <GridViewColumn DisplayMemberBinding="{Binding Path=X}" Width="110">X</GridViewColumn>
                     <GridViewColumn DisplayMemberBinding="{Binding Path=Y}" Width="110">Y</GridViewColumn>
                     <GridViewColumn DisplayMemberBinding="{Binding Path=Z}" Width="110">Z</GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+                                
+        <ListView Grid.Row="2" Grid.Column="3" Name="ProjList" Height="140" Margin="0 0 0 35">
+            <ListView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Edit" Click="MenuItem_OnClick" />
+                </ContextMenu>
+            </ListView.ContextMenu>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="55" Header="R1">
+                    <GridViewColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Path=R1}" Padding="0" Margin="0,0,0,0"/>
+                        </DataTemplate>
+                    </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="55" Header="R2">
+                    <GridViewColumn.CellTemplate>
+                        <DataTemplate>
+                            <Label Content="{Binding Path=R2}" Padding="0" Margin="0,0,0,0"/>
+                        </DataTemplate>
+                    </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="55" Header="R3">
+                    <GridViewColumn.CellTemplate>
+                        <DataTemplate>
+                            <Label Content="{Binding Path=R3}" Padding="0" Margin="0,0,0,0"/>
+                        </DataTemplate>
+                    </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="55" Header="R4">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label Content="{Binding Path=R4}" Padding="0" Margin="0,0,0,0"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>

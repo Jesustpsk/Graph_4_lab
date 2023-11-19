@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -54,13 +55,43 @@ namespace Graph_4_lab
             vertices = Display.CreateFigure(_figure, meshVisualInput, helixViewportInput);
             Display.FillListView(CordList, vertices);
         }
-        
+        private void BtnProj_OnClick(object sender, RoutedEventArgs e)
+        {
+            ProjList.Items.Clear();
+            
+            //построение матрицы проецирования
+            var items = new List<ProjectionMatrix> //test
+            {
+                new() { R1 = "1", R2 = "2", R3 = "3", R4 = "4"},
+                new() { R1 = "1", R2 = "2", R3 = "3", R4 = "4"},
+                new() { R1 = "1", R2 = "2", R3 = "3", R4 = "4"}
+            };
+
+            ProjList.ItemsSource = items;
+        }
+        private void MenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (ProjList.Items.Count == 0) return;
+            var index = ProjList.SelectedIndex;
+            var inputRead = new InputBox("Insert matrix string", "Title", "Arial", 15).ShowDialog();
+            var reg = new Regex($@"([0-9] [0-9] [0-9] [0-9])");
+            var match = reg.Match(inputRead);
+            if (match.ToString() == "") return;
+            (ProjList.Items[index] as ProjectionMatrix)!.R1 = inputRead.Split(' ')[0];
+            (ProjList.Items[index] as ProjectionMatrix)!.R2 = inputRead.Split(' ')[1];
+            (ProjList.Items[index] as ProjectionMatrix)!.R3 = inputRead.Split(' ')[2];
+            (ProjList.Items[index] as ProjectionMatrix)!.R3 = inputRead.Split(' ')[3];
+            ProjList.Items.Refresh();
+            
+            //вызов применения матрицы к фигуре
+        }
         
         private void LoadObjectFromFile(string filePath)
         {
             _figure.Clear();
             vertices.Clear();
             CordList.Items.Clear();
+            ProjList.Items.Clear();
             
             meshVisualInput.Children.Clear();
             meshVisualOutput.Children.Clear();
