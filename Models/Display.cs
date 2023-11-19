@@ -107,7 +107,7 @@ public class Display
             var labelC = new BillboardTextVisual3D
             {
                 Position = new Point3D(p.X + 0.1, p.Y + 0.1, p.Z + 0.1),
-                Text = Point3DtoString(p),
+                Text = Point3DtoString(HelpFunctions.RoundUp(p,2)),
                 Foreground = Brushes.Black,
                 FontSize = 8
             };

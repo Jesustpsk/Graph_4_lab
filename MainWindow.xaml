@@ -6,13 +6,13 @@
         xmlns:local="clr-namespace:Graph_4_lab"
         xmlns:h="http://helix-toolkit.org/wpf"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="1200">
-    <Grid ShowGridLines="True">
+        Title="MainWindow" Height="700" Width="1200">
+    <Grid ShowGridLines="False">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.1*"/>
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="0.1*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -33,18 +33,9 @@
             <h:DefaultLights/>
             <h:MeshGeometryVisual3D x:Name="meshVisualOutput"/>
         </h:HelixViewport3D>
-        
-                                <!--                          BUTTONS                          !-->
-        <Button Grid.Row="2" Grid.Column="3" Name="BtnLoadFile"
-                Width="100" Height="30" Margin="110 140 0 0"
-                Click="BtnLoadFile_OnClick">Load Figure</Button>
-                                
-        <Button Grid.Row="2" Grid.Column="3" Name="BtnProj"
-                Width="100" Height="30" Margin="0 140 110 0"
-                Click="BtnProj_OnClick">Projection</Button>
                                 
                                 <!--                          MATRIX                           !-->
-        <ListView Grid.Row="2" Grid.Column="1" Name="CordList">
+        <ListView Grid.Row="2" Grid.Column="1" Name="CordListBefore">
             <ListView.View>
                 <GridView>
                     <GridViewColumn DisplayMemberBinding="{Binding Path=N}" Width="110">№</GridViewColumn>
@@ -55,45 +46,185 @@
             </ListView.View>
         </ListView>
                                 
-        <ListView Grid.Row="2" Grid.Column="3" Name="ProjList" Height="140" Margin="0 0 0 35">
-            <ListView.ContextMenu>
-                <ContextMenu>
-                    <MenuItem Header="Edit" Click="MenuItem_OnClick" />
-                </ContextMenu>
-            </ListView.ContextMenu>
+        <ListView Grid.Row="2" Grid.Column="2" Name="CordListAfter">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Width="55" Header="R1">
-                    <GridViewColumn.CellTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Path=R1}" Padding="0" Margin="0,0,0,0"/>
-                        </DataTemplate>
-                    </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn Width="55" Header="R2">
-                    <GridViewColumn.CellTemplate>
-                        <DataTemplate>
-                            <Label Content="{Binding Path=R2}" Padding="0" Margin="0,0,0,0"/>
-                        </DataTemplate>
-                    </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn Width="55" Header="R3">
-                    <GridViewColumn.CellTemplate>
-                        <DataTemplate>
-                            <Label Content="{Binding Path=R3}" Padding="0" Margin="0,0,0,0"/>
-                        </DataTemplate>
-                    </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn Width="55" Header="R4">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <Label Content="{Binding Path=R4}" Padding="0" Margin="0,0,0,0"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=N}" Width="110">№</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=X}" Width="110">X</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Y}" Width="110">Y</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Z}" Width="110">Z</GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>
+                                
+        
 
+        <ToolBarTray Grid.Row="1" Grid.Column="3" Grid.RowSpan="2" Orientation="Vertical" Margin="10 0 0 0">
+            <ToolBar>
+                <StackPanel Orientation="Vertical" Margin="0 0 0 0 ">
+                    <Button Name="BtnLoadFile" Margin="10 0 10 0"
+                            Click="BtnLoadFile_OnClick">Load Figure</Button>
+                </StackPanel>
+                <StackPanel Orientation="Vertical" Margin="10 10 15 0">
+                <!--                          Transform Menu                          !-->
+        <Label Width="100" Height="25" Margin="0 0 0 0">Select an action:</Label>
+        <ComboBox Name="CBoxTransform" Width="200" Height="50" Margin="0 0 0 0">
+            <ComboBoxItem Selected="CBItem_Move_Selected">
+                <StackPanel>
+                    <TextBlock FontSize="16">Перенос</TextBlock>
+                    <TextBlock>В направлении ребра</TextBlock>
+                </StackPanel>
+            </ComboBoxItem>
+                
+            <ComboBoxItem Selected="CBItem_Scaling_Selected">
+                <StackPanel>
+                    <TextBlock FontSize="16">Масштабирование</TextBlock>
+                    <TextBlock>Перпендикулярно плоскости</TextBlock>
+                </StackPanel>
+            </ComboBoxItem>
+                
+            <ComboBoxItem Selected="CBItem_Reflection_Selected">
+                <StackPanel>
+                    <TextBlock FontSize="16">Отражение</TextBlock>
+                    <TextBlock>Относительно произвольной прямой</TextBlock>
+                </StackPanel>
+            </ComboBoxItem>
+                
+            <ComboBoxItem Selected="CBItem_Rotation_Selected">
+                <StackPanel>
+                    <TextBlock FontSize="16">Поворот</TextBlock>
+                    <TextBlock>Вокруг заданной прямой OP</TextBlock>
+                </StackPanel>
+            </ComboBoxItem>
+        </ComboBox>
+                </StackPanel>
+        <StackPanel Orientation="Vertical" Margin="5 10 5 0">
+        <TextBlock 
+                   Width="200" Margin="0 0 0 0" 
+                   Name="InfoBlock" TextWrapping="Wrap"></TextBlock>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
+            <Label Name="lFist">LABEL1:</Label>
+            <TextBox Name="tbFirst" Margin="0 0 0 0" Width="100"></TextBox>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
+            <Label Name="lSecond">LABEL2:</Label>
+            <TextBox Name="tbSecond" Margin="0 0 0 0" Width="100"></TextBox>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
+            <Label Name="lThird">LABEL3:</Label>
+            <TextBox Name="tbThird" Margin="0 0 0 0" Width="100"></TextBox>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
+            <Label Name="lFourth">LABEL4:</Label>
+            <TextBox Name="tbFourth" Margin="0 0 0 0" Width="100"></TextBox>
+        </StackPanel>
+        <StackPanel Orientation="Vertical">
+            <Button Margin="10 10 10 0"
+                    Click="ButtonExecute_OnClick">Execute</Button>
+        </StackPanel>
+                <StackPanel Orientation="Vertical" Margin="0 10 0 0">
+                <DataGrid Name="gridMatrix" Width="150" Margin="0 10 0 0" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Disabled"
+                          CanUserAddRows="False" CanUserDeleteRows="False" HeadersVisibility="None"
+                          CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False"
+                          CanUserSortColumns="False" AutoGenerateColumns="True" SelectionMode="Extended" SelectionUnit="Cell" SelectedCellsChanged="GridMatrix_OnSelectedCellsChanged" >
+                                <DataGrid.Columns>
+                                    
+                                    <DataGridTemplateColumn  Header="r1" Width="37.5">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock>
+                                                    <TextBlock Text="{Binding r1}"></TextBlock>
+                                                </TextBlock>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>        
+                                    <DataGridTemplateColumn.CellEditingTemplate>
+                                        <DataTemplate>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="1*" />
+                                                    <ColumnDefinition Width="auto" />
+                                                </Grid.ColumnDefinitions>
+                                                <TextBox Text="{Binding r1,Mode=TwoWay}" />
+                                            </Grid>
+                                        </DataTemplate>                                 
+                                    </DataGridTemplateColumn.CellEditingTemplate>
+                                    </DataGridTemplateColumn>
+                                    
+                                    
+                                    
+                                    <DataGridTemplateColumn  Header="r2" Width="37.5">                                            
+                                        <DataGridTemplateColumn.CellTemplate>                                                   
+                                            <DataTemplate>                                                                      
+                                                <TextBlock>                                                                     
+                                                    <TextBlock Text="{Binding r2}"></TextBlock>                                 
+                                                </TextBlock>                                                                    
+                                            </DataTemplate>                                                                     
+                                        </DataGridTemplateColumn.CellTemplate>  
+                                        <DataGridTemplateColumn.CellEditingTemplate>
+                                            <DataTemplate>
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="1*" />
+                                                        <ColumnDefinition Width="auto" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <TextBox Text="{Binding r2,Mode=TwoWay}" />
+                                                </Grid>
+                                            </DataTemplate>                                 
+                                        </DataGridTemplateColumn.CellEditingTemplate>
+                                    </DataGridTemplateColumn>                                                                   
+                                    
+                                    
+                                    
+                                    
+                                    <DataGridTemplateColumn  Header="r3" Width="37.5">                                            
+                                        <DataGridTemplateColumn.CellTemplate>                                                   
+                                            <DataTemplate>                                                                      
+                                                <TextBlock>                                                                     
+                                                    <TextBlock Text="{Binding r3}"></TextBlock>                                 
+                                                </TextBlock>                                                                    
+                                            </DataTemplate>                                                                     
+                                        </DataGridTemplateColumn.CellTemplate>     
+                                        <DataGridTemplateColumn.CellEditingTemplate>
+                                            <DataTemplate>
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="1*" />
+                                                        <ColumnDefinition Width="auto" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <TextBox Text="{Binding r3,Mode=TwoWay}" />
+                                                </Grid>
+                                            </DataTemplate>                                 
+                                        </DataGridTemplateColumn.CellEditingTemplate>
+                                    </DataGridTemplateColumn>      
+                                    
+                                    
+                                    <DataGridTemplateColumn  Header="r4" Width="37.5">                                            
+                                        <DataGridTemplateColumn.CellTemplate>                                                   
+                                            <DataTemplate>                                                                      
+                                                <TextBlock>                                                                     
+                                                    <TextBlock Text="{Binding r4}"></TextBlock>                                 
+                                                </TextBlock>                                                                    
+                                            </DataTemplate>                                                                     
+                                        </DataGridTemplateColumn.CellTemplate>  
+                                        <DataGridTemplateColumn.CellEditingTemplate>
+                                            <DataTemplate>
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="1*" />
+                                                        <ColumnDefinition Width="auto" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <TextBox Text="{Binding r4,Mode=TwoWay}" />
+                                                </Grid>
+                                            </DataTemplate>                                 
+                                        </DataGridTemplateColumn.CellEditingTemplate>
+                                    </DataGridTemplateColumn>      
+                        </DataGrid.Columns>
+                </DataGrid>
+                    <Button Click="ButtonApply_OnClick" Margin="10 10 10 0">Apply</Button>
+                </StackPanel>
+                
+            </ToolBar>
+        </ToolBarTray>
     </Grid>
 </Window>
