@@ -17,6 +17,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Graph_4_lab.Models;
 using Microsoft.Win32;
+using static Graph_4_lab.Models.ProjectionMatrix;
 
 namespace Graph_4_lab
 {
@@ -28,6 +29,7 @@ namespace Graph_4_lab
         private string objectFilePath;
         private static List<Point3D> vertices = new();
         public static List<Point3D> _figure = new();
+        public static List<List<double>>? matrix = new();
         public MainWindow()
         {
             InitializeComponent();
@@ -53,21 +55,30 @@ namespace Graph_4_lab
 #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
             
             vertices = Display.CreateFigure(_figure, meshVisualInput, helixViewportInput);
-            Display.FillListView(CordList, vertices);
+            Display.FillListView(CordListBefore, vertices);
+            CBoxTransform.SelectedIndex = -1;
+            InfoBlock.Text = "";
         }
         private void BtnProj_OnClick(object sender, RoutedEventArgs e)
         {
-            ProjList.Items.Clear();
-            
+            matrix.Clear();
             //построение матрицы проецирования
-            var items = new List<ProjectionMatrix> //test
+            //test
+            matrix = new()
             {
-                new() { R1 = "1", R2 = "2", R3 = "3", R4 = "4"},
-                new() { R1 = "1", R2 = "2", R3 = "3", R4 = "4"},
-                new() { R1 = "1", R2 = "2", R3 = "3", R4 = "4"}
-            };
+                new List<double> {1, 1, 1, 1},
+                new List<double> {1, 1, 1, 1},
+                new List<double> {1, 1, 1, 1},
+                new List<double> {1, 1, 1, 1}
+            }; 
+            
 
-            ProjList.ItemsSource = items;
+            SetMatrix(matrix, ProjList);
+        }
+        
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
         }
         private void MenuItem_OnClick(object sender, RoutedEventArgs e)
         {
@@ -77,10 +88,7 @@ namespace Graph_4_lab
             var reg = new Regex($@"([0-9] [0-9] [0-9] [0-9])");
             var match = reg.Match(inputRead);
             if (match.ToString() == "") return;
-            (ProjList.Items[index] as ProjectionMatrix)!.R1 = inputRead.Split(' ')[0];
-            (ProjList.Items[index] as ProjectionMatrix)!.R2 = inputRead.Split(' ')[1];
-            (ProjList.Items[index] as ProjectionMatrix)!.R3 = inputRead.Split(' ')[2];
-            (ProjList.Items[index] as ProjectionMatrix)!.R3 = inputRead.Split(' ')[3];
+            ChangeValue(ProjList, inputRead, index, matrix);
             ProjList.Items.Refresh();
             
             //вызов применения матрицы к фигуре
@@ -90,8 +98,7 @@ namespace Graph_4_lab
         {
             _figure.Clear();
             vertices.Clear();
-            CordList.Items.Clear();
-            ProjList.Items.Clear();
+            matrix!.Clear();
             
             meshVisualInput.Children.Clear();
             meshVisualOutput.Children.Clear();
@@ -113,6 +120,26 @@ namespace Graph_4_lab
             var dots = reader.ReadToEnd();
             if (dots == "") return;
             _figure = Display.CreateList3D(dots);
+        }
+
+        private void CBItem_Move_Selected(object sender, RoutedEventArgs e)
+        {
+            InfoBlock.Text = "Info: Вдоль вектора, перпендикулярного ребру и проходящего через начало координат на расстояние, равное расстоянию от начала координат до ребра; \nУказание ребра";
+        }
+        
+        private void CBItem_Scaling_Selected(object sender, RoutedEventArgs e)
+        {
+            InfoBlock.Text = "Info: Вдоль нормали к плоскости; \nВвод координат трёх точек плоскости; \nВвод масштабного коэффициента";
+        }
+
+        private void CBItem_Reflection_Selected(object sender, RoutedEventArgs e)
+        {
+            InfoBlock.Text = "Info: Указание двух точек, через которые проходит прямая";
+        }
+
+        private void CBItem_Rotation_Selected(object sender, RoutedEventArgs e)
+        {
+            InfoBlock.Text = "Info: Указание точки P, ввод величины угла поворота";
         }
     }
 }

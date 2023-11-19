@@ -41,10 +41,25 @@
                                 
         <Button Grid.Row="2" Grid.Column="3" Name="BtnProj"
                 Width="100" Height="30" Margin="0 140 110 0"
-                Click="BtnProj_OnClick">Projection</Button>
+                Click="BtnProj_OnClick">Apply Matrix</Button>
+                                
+        <Button Grid.Row="1" Grid.Column="3" Width="200" Height="30"
+                Margin="0 320 0 0"
+                Click="ButtonBase_OnClick">Execute</Button>
                                 
                                 <!--                          MATRIX                           !-->
-        <ListView Grid.Row="2" Grid.Column="1" Name="CordList">
+        <ListView Grid.Row="2" Grid.Column="1" Name="CordListBefore">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=N}" Width="110">№</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=X}" Width="110">X</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Y}" Width="110">Y</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Z}" Width="110">Z</GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+                                
+        <ListView Grid.Row="2" Grid.Column="2" Name="CordListAfter">
             <ListView.View>
                 <GridView>
                     <GridViewColumn DisplayMemberBinding="{Binding Path=N}" Width="110">№</GridViewColumn>
@@ -95,5 +110,39 @@
             </ListView.View>
         </ListView>
 
+                                <!--                          Transform Menu                          !-->
+        <Label Grid.Row="1" Grid.Column="3" Width="100" Height="25" Margin="0 0 0 330">Select an action:</Label>
+        <ComboBox Grid.Row="1" Grid.Column="3" Name="CBoxTransform" Width="200" Height="50" Margin="0 0 0 250">
+            <ComboBoxItem Selected="CBItem_Move_Selected">
+                <StackPanel>
+                    <TextBlock FontSize="16">Перенос</TextBlock>
+                    <TextBlock>В направлении ребра</TextBlock>
+                </StackPanel>
+            </ComboBoxItem>
+                
+            <ComboBoxItem Selected="CBItem_Scaling_Selected">
+                <StackPanel>
+                    <TextBlock FontSize="16">Масштабирование</TextBlock>
+                    <TextBlock>Перпендикулярно плоскости</TextBlock>
+                </StackPanel>
+            </ComboBoxItem>
+                
+            <ComboBoxItem Selected="CBItem_Reflection_Selected">
+                <StackPanel>
+                    <TextBlock FontSize="16">Отражение</TextBlock>
+                    <TextBlock>Относительно произвольной прямой</TextBlock>
+                </StackPanel>
+            </ComboBoxItem>
+                
+            <ComboBoxItem Selected="CBItem_Rotation_Selected">
+                <StackPanel>
+                    <TextBlock FontSize="16">Поворот</TextBlock>
+                    <TextBlock>Вокруг заданной прямой OP</TextBlock>
+                </StackPanel>
+            </ComboBoxItem>
+        </ComboBox>
+        <TextBlock Grid.Row="1" Grid.Column="3" 
+                   Width="200" Height="100" Margin="0 0 0 90" 
+                   Name="InfoBlock" TextWrapping="Wrap"></TextBlock>
     </Grid>
 </Window>
